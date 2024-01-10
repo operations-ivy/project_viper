@@ -1,4 +1,7 @@
 # project_viper
 Project Viper (hiss)
 
-Code project to gather information on in-range Wifi networks and hosts associated with those Wifi networks. Stores the information on a local SQLite db file. Mostly a chance to write python and use Bazel to build
+project to store smaller coding projects.
+
+- `api_request`: queries chuck norris joke API
+- `sqlite_storage`: stores queried chuck norris joke api data

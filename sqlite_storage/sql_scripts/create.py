@@ -35,7 +35,7 @@ def main():
     database = "/home/zaphod/code/project_viper/sqlite_storage/sqlite.db"
 
     sql_create_chuck_table = """ CREATE TABLE IF NOT EXISTS chuck (
-                                        id integer PRIMARY KEY,
+                                        id text PRIMARY KEY,
                                         value text NOT NULL
                                     ); """
 

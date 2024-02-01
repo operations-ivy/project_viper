@@ -161,3 +161,5 @@ cython_debug/
 
 bazel-*
 *.lock
+log_muncher/sample_logs
+flask_k8s_docker/flask-k8s-docker-env

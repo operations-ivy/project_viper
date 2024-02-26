@@ -36,7 +36,8 @@ def main():
 
     sql_create_chuck_table = """ CREATE TABLE IF NOT EXISTS chuck (
                                         id text PRIMARY KEY,
-                                        value text NOT NULL
+                                        value text NOT NULL,
+                                        timestamp timestamp DEFAULT CURRENT_TIMESTAMP
                                     ); """
 
     conn = create_connection(database)

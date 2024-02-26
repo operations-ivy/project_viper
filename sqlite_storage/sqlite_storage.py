@@ -1,5 +1,7 @@
 import sqlite3
 from sqlite3 import Error
+import datetime
+
 
 class SqliteStorage:
     def __init__(self, db_path):
@@ -11,20 +13,22 @@ class SqliteStorage:
         self.cursor.close()
         self.conn.close()
 
-    # def check_if_joke_exists(self, joke_id):
-    #     pass
-
     def insert_joke(self, joke_id, joke_value):
-        sql = ''' INSERT OR IGNORE INTO chuck(id,value)
-                VALUES(?,?) '''
-        self.cursor.execute(sql, (joke_id, joke_value))
+        sql = ''' INSERT OR IGNORE INTO chuck(id,value,timestamp)
+                VALUES(?,?,?) '''
+        self.cursor.execute(sql, (joke_id, joke_value, datetime.datetime.now()))
         self.conn.commit()
     
     def check_for_duplicate(self, joke_id):
+        joke_exists = False
         sql = ''' SELECT * FROM chuck WHERE id = ? '''
         self.cursor.execute(sql, (joke_id,))
+        if self.cursor.fetchone():
+            joke_exists = True
+        else:
+            joke_exists = False
         
-        return self.cursor.fetchone()
+        return joke_exists
     
     def read_all_jokes(self):
         self.cursor.execute('SELECT * FROM chuck')

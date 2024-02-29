@@ -1,52 +1,45 @@
-import api_request.api_request as api
-import sqlite_storage.sqlite_storage as storage
+from api_request.api_request import ApiRequest
+from sqlite_storage.sqlite_storage import SqliteStorage
 
 
 if __name__ == "__main__":
-    api = api.ApiRequest()
-    storage = storage.SqliteStorage(db_path="/home/zaphod/code/project_viper/sqlite_storage/sqlite.db")
+    api = ApiRequest()
+    storage = SqliteStorage(db_path="/home/zaphod/code/project_viper/sqlite_storage/sqlite.db")
+
     joke_categories = api.get_categories()
     joke_count = 0
-    for category in joke_categories:
-        print("###")
-        print("Category: " + category)
-        print("###")
-        ### this approach won't work if we've already added all jokes in a category
-        # count = 0
-        # while count <= 10:
-        #     joke_data = api.get_random_joke_from_category(category)
-        #     joke_id = joke_data["id"]
-        #     joke_category = category
-        #     joke_value = joke_data["value"]
-        #     if storage.check_for_duplicate(joke_id, joke_value) == False:
-        #         storage.insert_joke(joke_id, category, joke_value)
-        #         print("Joke " + str(count) + " added: " + joke_id)
-        #         count += 1
-        #     else:
-        #         print("Duplicate joke found: " + joke_id)
-        #         continue
-        for i in range(250):
-            joke_data = api.get_random_joke_from_category(category)
-            joke_id = joke_data["id"]
-            joke_category = category
-            joke_value = joke_data["value"]
-            if storage.check_for_duplicate(joke_id, joke_value) == False:
-                storage.insert_joke(joke_id, category, joke_value)
-                joke_count += 1
-                print("Joke " + str(joke_count) + " added: " + joke_id)
-            else:
-                print("Duplicate joke found: " + joke_id)
-                continue
+    desired_joke_count = 10
+    joke_range = 500
+    max_duplicates = 100
     
-    print("Total Jokes Added this run: " + str(joke_count))
-    # for i in range(500):
-    #     joke_id = api.get_random()["id"]
-    #     joke_value = api.get_random()["value"]
-    #     if storage.check_for_duplicate(joke_id) == False:
-    #         storage.insert_joke(joke_id, joke_value)
-    #         print("Joke " + str(i) + " added: " + joke_id)
-    #     else:
-    #         print("Duplicate joke found")
-    
-    
-    # storage.close_connection()
+    while joke_count < desired_joke_count:
+        for category in joke_categories:
+            print("###")
+            print("Running " + str(joke_range) + " GETs from the random API for category: " + category + "...")
+            print("Stopping when " + str(desired_joke_count) + " total jokes are added.")
+            print("Still need " + str(desired_joke_count - joke_count) + " jokes.")
+            print("Max duplicate checks allowed: " + str(max_duplicates))
+            print("###")
+            
+            duplicate_count = 0
+            for i in range(joke_range):
+                joke_data = api.get_random_joke_from_category(category)
+                joke_id = joke_data["id"]
+                joke_category = category
+                joke_value = joke_data["value"]
+                
+                if storage.check_for_duplicate(joke_id, joke_value) == False and duplicate_count < max_duplicates:
+                    storage.insert_joke(joke_id, category, joke_value)
+                    joke_count += 1
+                    print("Joke " + str(joke_count) + " added: " + joke_id)
+                elif duplicate_count >= max_duplicates:
+                    print(str(max_duplicates) + " Duplicate checks made, moving to next category.")
+                    break
+                else:
+                    duplicate_count += 1
+                    duplicate_checks_remaining = max_duplicates - duplicate_count
+                    # print("Duplicate joke found: " + joke_id + " :: " + str(duplicate_checks_remaining) + " checks remaining.")
+                    continue
+        
+        print("Total Jokes Added this run: " + str(joke_count))   
+    storage.close_connection()

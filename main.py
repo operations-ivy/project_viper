@@ -8,8 +8,8 @@ if __name__ == "__main__":
 
     joke_categories = api.get_categories()
     joke_count = 0
-    desired_joke_count = 10
-    joke_range = 500
+    desired_joke_count = 600
+    joke_range = 1000
     max_duplicates = 100
     
     while joke_count < desired_joke_count:

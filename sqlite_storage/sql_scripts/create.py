@@ -47,13 +47,18 @@ def main():
 
     sql_create_id_value_idx_on_chuck_table = """ CREATE INDEX IF NOT EXISTS chuck_id_value_index ON chuck (id, value); """
     sql_create_category_value_idx_on_chuck_table = """ CREATE INDEX IF NOT EXISTS chuck_category_value_index ON chuck (category, value); """
-    
+    alter_sql_id_idx = """ CREATE INDEX IF NOT EXISTS chuck_id_idx ON chuck (id); """
+    alter_sql_id_category_idx = """ CREATE INDEX IF NOT EXISTS chuck_id_category_idx ON chuck (id, category); """
+    alter_sql_id_category_value_idx = """ CREATE INDEX IF NOT EXISTS chuck_id_category_value_idx ON chuck (id, category, value); """
     conn = create_connection(database)
 
     if conn is not None:
         create_table(conn, sql_create_chuck_table,
                      sql_create_id_value_idx_on_chuck_table,
                      sql_create_category_value_idx_on_chuck_table)
+                    #  alter_sql_id_idx,
+                    #  alter_sql_id_category_idx,
+                    #  alter_sql_id_category_value_idx)
 
     else:
         print("Error! cannot create the database connection.")

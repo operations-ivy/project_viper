@@ -1,3 +1,10 @@
+import sys
+import os
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+sys.path.append(parent_dir)
+
 from api_request.api_request import ApiRequest
 from sqlite_storage.sqlite_storage import SqliteStorage
 
@@ -8,9 +15,9 @@ if __name__ == "__main__":
 
     joke_categories = api.get_categories()
     joke_count = 0
-    desired_joke_count = 600
-    joke_range = 1000
-    max_duplicates = 100
+    desired_joke_count = 250
+    joke_range = 500
+    max_duplicates = 50
     
     while joke_count < desired_joke_count:
         for category in joke_categories:

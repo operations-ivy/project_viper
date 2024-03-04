@@ -42,8 +42,3 @@ class ApiRequest:
         json_data = json.loads(response.text)
         
         return json_data
-
-# while True:
-#     new_request = get_random()
-#     print(new_request)
-#     time.sleep(10)

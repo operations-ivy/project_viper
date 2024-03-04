@@ -10,8 +10,9 @@ from sqlite_storage.sqlite_storage import SqliteStorage
 
 
 if __name__ == "__main__":
+    db_location = sys.argv[1]
     api = ApiRequest()
-    storage = SqliteStorage(db_path="/home/zaphod/code/project_viper/sqlite_storage/sqlite.db")
+    storage = SqliteStorage(db_path=db_location)
 
     joke_categories = api.get_categories()
     joke_count = 0

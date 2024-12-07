@@ -166,3 +166,5 @@ flask_k8s_docker/flask-k8s-docker-env
 sqlite_storage/old_sqlite.db
 sqlite_storage/sqlite.db
 sqlite_storage/sqlite.db.bak
+
+ssh_hosts_app/old

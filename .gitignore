@@ -168,3 +168,4 @@ sqlite_storage/sqlite.db
 sqlite_storage/sqlite.db.bak
 
 ssh_hosts_app/old
+.pre-commit-config.yaml

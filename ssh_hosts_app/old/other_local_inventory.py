@@ -1,8 +1,8 @@
 from flask import *
 import nmap
 import pandas as pd
-app = Flask(__name__)
 
+app = Flask(__name__)
 @app.route("/tables")
 def show_tables():
     nm = nmap.PortScanner()

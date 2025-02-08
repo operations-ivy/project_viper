@@ -36,7 +36,7 @@ def create_table(conn, create_table_sql,
 
 
 def main():
-    database = "/home/zaphod/code/python/project_viper/sqlite_storage/sqlite.db"
+    database = "/home/zaphod/code/project_viper/src/sqlite_storage/sqlite.db"
 
     sql_create_chuck_table = """ CREATE TABLE IF NOT EXISTS chuck (
                                         id text PRIMARY KEY,

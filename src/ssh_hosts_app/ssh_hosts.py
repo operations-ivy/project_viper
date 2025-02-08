@@ -22,6 +22,11 @@ def get_open_ssh_servers():
         
     return ssh_servers
 
+@app.route("/health")
+def health():
+    return jsonify(
+        status="UP"
+    )
 
 @app.route('/')
 def display_data():
@@ -29,4 +34,4 @@ def display_data():
     return render_template('index.html', ssh_servers=ssh_servers)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')

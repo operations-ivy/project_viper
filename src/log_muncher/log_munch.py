@@ -1,11 +1,11 @@
-log_dir = "/home/zaphod/code/sample_logs"
+log_dir = "/home/zaphod/code/project_viper/src/log_muncher/sample_logs"
 
 auth_log = log_dir + "/auth.log"
 boot_log = log_dir + "/boot.log"
 messages_log = log_dir + "/messages"
 
 known_logs= [auth_log, boot_log, messages_log]
-all_logs = "/home/zaphod/code/sample_logs/*"
+all_logs = "/home/zaphod/code/project_viper/src/log_muncher/sample_logs/*"
 
 read_auth_log = open(auth_log, "r")
 line_sum = 0

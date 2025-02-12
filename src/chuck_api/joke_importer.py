@@ -11,7 +11,7 @@ from sqlite_storage.sqlite_storage import SqliteStorage
 
 if __name__ == "__main__":
     # db_location = sys.argv[1]
-    db_location = "/home/zaphod/code/project_viper/src/sqlite_storage/sqlite.db"
+    db_location = os.environ["DB_LOCATION"]
     api = ApiRequest()
     storage = SqliteStorage(db_path=db_location)
 

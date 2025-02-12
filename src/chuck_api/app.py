@@ -2,9 +2,6 @@ import os
 import sys
 
 from flask import *
-import pickle
-from opentelemetry.instrumentation.flask import FlaskInstrumentor
-
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
@@ -12,7 +9,6 @@ sys.path.append(parent_dir)
 
 from sqlite_storage.sqlite_storage import SqliteStorage
 
-FlaskInstrumentor().instrument(enable_commenter=True, commenter_options={})
 
 # joke_json = {
 #     {'id': ''},
@@ -22,13 +18,9 @@ FlaskInstrumentor().instrument(enable_commenter=True, commenter_options={})
 # }
 
 app = Flask(__name__)
-
-
-FlaskInstrumentor().instrument_app(app)
-
 @app.route("/")
 def show_all_jokes():
-    db_location = "/home/zaphod/code/project_viper/src/sqlite_storage/sqlite.db"
+    db_location = os.environ["DB_LOCATION"]
     storage = SqliteStorage(db_path=db_location)
 
     all_of_it = storage.read_all_jokes()

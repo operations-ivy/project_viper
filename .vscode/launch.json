@@ -8,7 +8,8 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "env": {
-                    "OTEL_EXPORTER_JAEGER_ENDPOINT": "http://localhost:14268/api/traces"
+                    "OTEL_EXPORTER_JAEGER_ENDPOINT": "http://localhost:14268/api/traces",
+                    "DB_LOCATION": "/home/zaphod/code/project_viper/src/sqlite_storage/sqlite.db"
             }
         },
         {

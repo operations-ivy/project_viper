@@ -10,8 +10,8 @@ services:
       - "zookeeper-volume:/bitnami"
     environment:
       - ALLOW_ANONYMOUS_LOGIN=yes
-    # networks:
-    #   - jokenet
+    networks:
+      - jokenet
 
   kafka:
     restart: always
@@ -29,25 +29,25 @@ services:
       - KAFKA_CFG_LISTENERS=CLIENT://:9092,EXTERNAL://:9093
       - KAFKA_CFG_ADVERTISED_LISTENERS=CLIENT://kafka:9092,EXTERNAL://localhost:9093
       - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=CLIENT
-    # networks:
-    #   - jokenet
+    networks:
+      - jokenet
     depends_on:
       - zookeeper
 
-  # joke-importer:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile
-  #   image: joke-importer:1.0
-  #   ports:
-  #     - 5000:5000
-  #   restart: always
-  #   networks:
-  #     - jokenet
+  joke-reader:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: joke-reader:1.0
+    ports:
+      - 5000:5000
+    restart: always
+    networks:
+      - jokenet
 
 volumes:
   kafka-volume:
   zookeeper-volume:
 
-# networks:
-#   jokenet:
+networks:
+  jokenet:

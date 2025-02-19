@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Port Hosts</title>
+</head>
+<body>
+    <h1>Open Port Hosts</h1>
+    <h1>Using Port: {{ port_servers[1] }}</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>IP</th>
+                <th>State</th>
+                <th>Server</th>
+                <th>Platform</th>
+                <th>OS</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ip_address, host_data in port_servers[0].items() %}
+            <tr>
+                <td>{{ ip_address }}</td>
+                <td>{{ host_data.port_state }}</td>
+                <td>{{ host_data.port_server }}</td>
+                <td>{{ host_data.host_platform }}</td>
+                <td>{{ host_data.host_os }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,14 +1,14 @@
 version: "2.42"
 services:
-  ssh-hosts:
+  port-hosts:
     build:
       context: .
       dockerfile: Dockerfile
-    image: ssh-hosts:1.7
+    image: port-hosts:1.0
     ports:
       - "5000:5000"
     restart: always
 #     networks:
-#       - sshnet
+#       - portnet
 # networks:
-#   sshnet:
+#   portnet:

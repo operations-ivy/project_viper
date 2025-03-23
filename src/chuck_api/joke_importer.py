@@ -7,8 +7,8 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
 sys.path.append(parent_dir)
 
-from api_request.api_request import ApiRequest
-from sqlite_storage.sqlite_storage import SqliteStorage
+from api_request.api_request import ApiRequest  # noqa: E402
+from sqlite_storage.sqlite_storage import SqliteStorage  # noqa: E402
 
 
 if __name__ == "__main__":
@@ -39,7 +39,7 @@ if __name__ == "__main__":
                 joke_category = category
                 joke_value = joke_data["value"]
 
-                if storage.check_for_duplicate(joke_id, joke_value) == False and duplicate_count < max_duplicates:
+                if storage.check_for_duplicate(joke_id, joke_value) is False and duplicate_count < max_duplicates:
                     storage.insert_joke(joke_id, category, joke_value)
                     joke_count += 1
                     print("Joke " + str(joke_count) + " added: " + joke_id)
@@ -49,7 +49,6 @@ if __name__ == "__main__":
                 else:
                     duplicate_count += 1
                     duplicate_checks_remaining = max_duplicates - duplicate_count
-                    # print("Duplicate joke found: " + joke_id + " :: " + str(duplicate_checks_remaining) + " checks remaining.")
                     continue
 
         print("Total Jokes Added this run: " + str(joke_count))

@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import nmap
 import pandas as pd
 
@@ -5,7 +7,7 @@ nm = nmap.PortScanner()
 
 bad_cols = ["command_line", "scaninfo", "scanstats"]
 good_cols = ["ip_address", "hostname"]
-host_dict = nm.scan('192.168.1.*', '22')
+host_dict = nm.scan("192.168.1.*", "22")
 
 df = pd.DataFrame(host_dict)
 
@@ -23,7 +25,7 @@ for i, row in inventory.iterrows():
 
 inventory.to_csv("/tmp/inventory", encoding="utf-8")
 
-out = inventory.reset_index().to_json(orient='records')
+out = inventory.reset_index().to_json(orient="records")
 
-with open('/tmp/inventory.json', 'w') as f:
+with open("/tmp/inventory.json", "w") as f:
     f.write(out)

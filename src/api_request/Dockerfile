@@ -7,4 +7,3 @@ ADD api_request.py .
 RUN pip3 install requests
 
 CMD ["python", "./api_request.py"]
-    

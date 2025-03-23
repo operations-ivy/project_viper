@@ -1,6 +1,8 @@
+from __future__ import annotations
+
+import datetime
 import sqlite3
 from sqlite3 import Error
-import datetime
 
 
 class SqliteStorage:
@@ -14,29 +16,28 @@ class SqliteStorage:
         self.conn.close()
 
     def insert_joke(self, joke_id, joke_category, joke_value):
-        sql = ''' INSERT OR IGNORE INTO chuck(id,category,value,timestamp)
-                VALUES(?,?,?,?) '''
+        sql = """ INSERT OR IGNORE INTO chuck(id,category,value,timestamp)
+                VALUES(?,?,?,?) """
         self.cursor.execute(sql, (joke_id, joke_category, joke_value, datetime.datetime.now()))
         self.conn.commit()
-    
+
     def check_for_duplicate(self, joke_id, joke_value):
         joke_exists = False
-        sql = ''' SELECT * FROM chuck WHERE id = ? AND value = ? '''
-        self.cursor.execute(sql, (joke_id,joke_value))
+        sql = """ SELECT * FROM chuck WHERE id = ? AND value = ? """
+        self.cursor.execute(sql, (joke_id, joke_value))
         if self.cursor.fetchone():
             joke_exists = True
         else:
             joke_exists = False
-        
+
         return joke_exists
 
     def get_joke_id_by_value(self, joke_value):
-        sql = ''' SELECT id FROM chuck WHERE value = ? '''
+        sql = """ SELECT id FROM chuck WHERE value = ? """
         self.cursor.execute(sql, (joke_value,))
         return self.cursor.fetchone()
-    
+
     def read_all_jokes(self):
-        self.cursor.execute('SELECT * FROM chuck')
+        self.cursor.execute("SELECT * FROM chuck")
 
         return self.cursor.fetchall()
-    

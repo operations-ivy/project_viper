@@ -9,7 +9,7 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
 sys.path.append(parent_dir)
 
-from sqlite_storage.sqlite_storage import SqliteStorage
+from sqlite_storage.sqlite_storage import SqliteStorage  # noqa: E402
 
 
 app = Flask(__name__)

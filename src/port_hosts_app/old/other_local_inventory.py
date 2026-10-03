@@ -2,7 +2,8 @@ from __future__ import annotations
 
 import nmap
 import pandas as pd
-from flask import *
+from flask import Flask
+from flask import render_template
 
 app = Flask(__name__)
 

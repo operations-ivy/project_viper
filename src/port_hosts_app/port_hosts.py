@@ -1,9 +1,10 @@
 from __future__ import annotations
 
-import json
+from json import jsonify
 
 import nmap
-from flask import *
+from flask import Flask
+from flask import render_template
 
 cidr_range = "192.168.4.*"
 port = 22
